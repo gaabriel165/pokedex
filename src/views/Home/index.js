@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
+import List from "./components/List";
 import { Grid, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
@@ -17,6 +18,9 @@ const Home = () => {
       <Grid container>
         <Grid container item xs={12}>
           <Header />
+        </Grid>
+        <Grid container item>
+          <List />
         </Grid>
       </Grid>
     </>
