@@ -22,7 +22,7 @@ const Header = () => {
     <AppBar position="fixed" color="secondary">
       <Toolbar>
         <IconButton edge="start" aria-label="menu">
-          <img className={classes.root} width="45px" src="/pokeball-logo.png" />
+          <img className={classes.root} width="45px" src="/pokeball-logo.png" alt="pokeball-logo"/>
         </IconButton>
         <Typography
           style={{ marginLeft: "10px", fontWeight: "bold" }}

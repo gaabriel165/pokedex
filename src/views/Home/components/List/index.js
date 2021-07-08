@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  Box,
-  Button,
-  CircularProgress,
-  makeStyles,
-} from "@material-ui/core";
+import { Grid, Box, CircularProgress, makeStyles } from "@material-ui/core";
 import axios from "axios";
 import PokemonList from "./components/List";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -17,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   progress: {
     padding: theme.spacing(3),
-    marginTop: '35px',
+    marginTop: "35px",
     display: "block",
     margin: "0 auto",
   },
@@ -75,12 +69,12 @@ const List = () => {
             />
           }
           endMessage={<p>Fim da lista</p>}
-          style={{ overflow: 'hidden' }}
+          style={{ overflow: "hidden" }}
         >
-          <Grid container justify="center" xs={12} spacing={5}>
+          <Grid container item justify="center" xs={12} spacing={5}>
             {pokemonsData && pokemonsData.length
               ? pokemonsData.map((pokemon) => {
-                  return <PokemonList pokemon={pokemon} />;
+                  return <PokemonList key={pokemon.id} pokemon={pokemon} />;
                 })
               : null}
           </Grid>
