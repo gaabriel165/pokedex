@@ -11,7 +11,6 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import ChartSpecs from "./Chart";
 import pokemonId from "../../../../../helpers/pokemonId";
-import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,10 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const PokemonSpecs = ({ pokemon, open, setOpen, handleClose }) => {
   const classes = useStyles();
-
-  React.useEffect(() => {
-    axios.get("https://pokeapi.glitch.me/v1/pokemon/1");
-  }, []);
 
   return (
     <Dialog
