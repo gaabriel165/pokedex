@@ -6,8 +6,8 @@ import Home from "../views/Home/index";
 const Routes = () => {
   return (
     <BrowserRouter>
-      <Redirect exact from="/" to="/home" />
-      <Route exact path="/home">
+      <Redirect exact from="/" to="/" />
+      <Route exact path="/">
         <Home />
       </Route>
     </BrowserRouter>

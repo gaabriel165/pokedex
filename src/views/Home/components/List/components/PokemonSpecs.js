@@ -28,7 +28,7 @@ const PokemonSpecs = ({ pokemon, open, setOpen, handleClose }) => {
   const classes = useStyles();
 
   React.useEffect(() => {
-    axios.get("https://pokeapi.glitch.me/v1/pokemon/1");
+    axios.get("/pokemon/1");
   }, []);
 
   return (
