@@ -28,7 +28,7 @@ const PokemonSpecs = ({ pokemon, open, setOpen, handleClose }) => {
   const classes = useStyles();
 
   React.useEffect(() => {
-    axios.get("/pokemon/1");
+    axios.get("https://nocorsapp.herokuapp.com/pokeapi/v1/pokemon/1");
   }, []);
 
   return (
