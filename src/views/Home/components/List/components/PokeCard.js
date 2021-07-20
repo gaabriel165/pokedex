@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Paper, Box, Typography, makeStyles } from "@material-ui/core";
-import PokemonSpecs from "./PokemonSpecs";
+import PokeSpecs from "./PokeSpecs";
 import pokemonId from "../../../../../helpers/pokemonId";
 import pokemonName from "../../../../../helpers/pokemonName";
 
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(6),
     textAlign: "center",
-    height: "280px",
+    height: "250px",
     marginTop: "15px",
     "&:hover": {
       cursor: "pointer",
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PokemonList = ({ pokemon }) => {
+const PokeCard = ({ pokemon }) => {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
@@ -43,36 +43,15 @@ const PokemonList = ({ pokemon }) => {
             src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`}
             alt="pokemon-img"
           />
-          <Typography variant="h6">{pokemonId(pokemon.id)}</Typography>
-          <Typography style={{ marginTop: "15px" }} variant="h5">
+          <Typography variant="h6" style={{ marginTop: '20px' }}>{pokemonId(pokemon.id)}</Typography>
+          <Typography style={{ marginTop: "5px" }} variant="h5">
             {pokemonName(pokemon.name)}
           </Typography>
-          <Box
-            display="flex"
-            justifyContent="center"
-            style={{ marginTop: "10px" }}
-          >
-            {pokemon.types.map((types) => {
-              return (
-                <img
-                  key={`${pokemon.id}_${types.type.name}`}
-                  src={`/${types.type.name}.png`}
-                  width="60px"
-                  title={types.type.name}
-                  style={{
-                    marginRight: "5px",
-                    marginLeft: "5px",
-                  }}
-                  alt="pokemon-type"
-                />
-              );
-            })}
-          </Box>
         </Paper>
       </Grid>
 
       {open ? (
-        <PokemonSpecs
+        <PokeSpecs
           pokemon={pokemon}
           open={open}
           setOpen={setOpen}
@@ -83,4 +62,4 @@ const PokemonList = ({ pokemon }) => {
   );
 };
 
-export default PokemonList;
+export default PokeCard;

@@ -1,8 +1,9 @@
 import React from "react";
 import { Grid, Box, CircularProgress, makeStyles } from "@material-ui/core";
 import axios from "axios";
-import PokemonList from "./components/List";
+import PokeCard from "./components/PokeCard";
 import InfiniteScroll from "react-infinite-scroll-component";
+import getPokemonId from "../../../../helpers/getPokemonId";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,30 +21,26 @@ const useStyles = makeStyles((theme) => ({
 const List = () => {
   const classes = useStyles();
 
-  const [pokemonsData, setPokemonsData] = React.useState([]);
-
-  const [pageInfo, setPageInfo] = React.useState({
+  const [pokemons, setPokemons] = React.useState({
+    data: [],
     url: "https://pokeapi.co/api/v2/pokemon?limit=12&offset=0",
     more: true,
   });
 
   const getPokemons = async () => {
-    const pokemons = [];
-
-    await axios.get(pageInfo.url).then(async (response) => {
-      setPageInfo({
-        url: response.data.next,
-        more: pokemonsData.length < 1118 ? true : false,
-      });
+    await axios.get(pokemons.url).then(async (response) => {
+      const data = [];
 
       for (const pokemon of response.data.results) {
-        await axios
-          .get(pokemon.url)
-          .then((response) => pokemons.push(response.data));
+        data.push({ name: pokemon.name, id: getPokemonId(pokemon.url) });
       }
-    });
 
-    setPokemonsData((prevState) => [...prevState, ...pokemons]);
+      setPokemons((prevState) => ({
+        data: [...prevState.data, ...data],
+        url: response.data.next,
+        more: true,
+      }));
+    });
   };
 
   const fetchMore = () => {
@@ -58,9 +55,9 @@ const List = () => {
     <div className={classes.root}>
       <Box display="flex" align="center" justifyContent="center" m={1} p={1}>
         <InfiniteScroll
-          dataLength={pokemonsData.length}
+          dataLength={pokemons.data.length}
           next={fetchMore}
-          hasMore={pokemonsData.length < 1118 ? true : false}
+          hasMore={pokemons.data.length < 1118 ? true : false}
           loader={
             <CircularProgress
               className={classes.progress}
@@ -72,9 +69,9 @@ const List = () => {
           style={{ overflow: "hidden" }}
         >
           <Grid container item justify="center" xs={12} spacing={5}>
-            {pokemonsData && pokemonsData.length
-              ? pokemonsData.map((pokemon) => {
-                  return <PokemonList key={pokemon.id} pokemon={pokemon} />;
+            {pokemons.data && pokemons.data.length
+              ? pokemons.data.map((pokemon) => {
+                  return <PokeCard key={pokemon.id} pokemon={pokemon} />;
                 })
               : null}
           </Grid>
